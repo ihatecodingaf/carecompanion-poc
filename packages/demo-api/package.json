@@ -1,0 +1,9 @@
+{
+  "name": "@care-ai/demo-api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "In-browser stand-in for the Supabase backend, used by the public demo build only.",
+  "main": "src/index.ts",
+  "types": "src/index.ts"
+}

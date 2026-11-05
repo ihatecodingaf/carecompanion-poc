@@ -1,0 +1,7 @@
+.vercel
+.env
+.env.local
+.env*.local
+.env.dev
+.env.qa
+.env.production

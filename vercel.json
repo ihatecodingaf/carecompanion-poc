@@ -1,0 +1,9 @@
+{
+  "installCommand": "pnpm install",
+  "buildCommand": "pnpm --filter @care-ai/patient build",
+  "outputDirectory": "apps/patient/dist",
+  "framework": null,
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

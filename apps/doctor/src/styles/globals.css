@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Design tokens matching PRECOVERY figma ─────────────── */
+:root {
+  --teal:  #2BBFBF;
+  --red:   #E63946;
+  --gold:  #F59E0B;
+  --green: #10B981;
+  --blue:  #3B82F6;
+  --pur:   #8B5CF6;
+
+  /* Dark theme surfaces */
+  --bg:    #0D1B2A;
+  --bg2:   #132338;
+  --bg3:   #1A2F47;
+  --bg4:   #1F3A56;
+
+  /* Text */
+  --t:     #EEF2FF;
+  --t2:    #A8BAD0;
+  --t3:    #5F82A8;
+
+  /* Borders */
+  --b:     rgba(255,255,255,0.08);
+  --b2:    rgba(255,255,255,0.04);
+}
+
+* { box-sizing: border-box; }
+
+html {
+  font-size: 13px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--t);
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  max-width: 430px;
+  margin: 0 auto;
+  position: relative;
+  background: var(--bg);
+}
+
+/* ── Scrollbar hide ──────────────────────────────────────── */
+.no-scroll::-webkit-scrollbar { display: none; }
+.no-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ── Safe area for PWA ───────────────────────────────────── */
+.safe-bottom { padding-bottom: env(safe-area-inset-bottom, 0px); }

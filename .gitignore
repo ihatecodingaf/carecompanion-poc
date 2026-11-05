@@ -1,0 +1,16 @@
+node_modules/
+.next/
+dist/
+dev-dist/
+.env
+.env.local
+.env.production
+*.local
+.DS_Store
+.vercel
+*.tsbuildinfo
+
+# Demo site build output
+_site/
+.env.dev
+.env.qa

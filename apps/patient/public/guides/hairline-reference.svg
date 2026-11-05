@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <rect width="400" height="300" fill="#1B2B3E"/>
+  <ellipse cx="200" cy="215" rx="118" ry="140" fill="#E9B99A"/>
+  <path d="M82 190 C 86 92, 150 48, 200 48 C 250 48, 314 92, 318 190 C 300 150, 276 128, 252 120 C 236 140, 214 132, 200 118 C 186 132, 164 140, 148 120 C 124 128, 100 150, 82 190 Z" fill="#3B2A20"/>
+  <path d="M100 168 C 130 128, 160 122, 200 118 C 240 122, 270 128, 300 168" fill="none" stroke="#2BBFBF" stroke-width="3" stroke-dasharray="8 6"/>
+  <ellipse cx="160" cy="214" rx="12" ry="7" fill="#3B2A20"/><ellipse cx="240" cy="214" rx="12" ry="7" fill="#3B2A20"/>
+  <text x="200" y="285" fill="#CFE3F2" font-family="system-ui,sans-serif" font-size="15" text-anchor="middle">Face the camera · hairline fully visible · good light</text>
+</svg>

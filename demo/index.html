@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Care.ai — Live Demo</title>
+  <meta name="description" content="AI-powered remote patient monitoring for dermatology. Patient PWA and doctor PWA, running live with sample data." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0D1B2A; --bg2: #13263A; --card: #172E45; --line: #24405C;
+      --text: #E8F1F8; --muted: #93A9BE; --teal: #2BBFBF; --red: #E63946; --gold: #F59E0B; --green: #10B981;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font: 15px/1.55 Inter, system-ui, sans-serif; }
+    a { color: var(--teal); }
+    .wrap { max-width: 1240px; margin: 0 auto; padding: 0 20px; }
+
+    header { padding: 48px 0 28px; background: radial-gradient(900px 380px at 80% -20%, rgba(43,191,191,.18), transparent 70%); }
+    .eyebrow { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--teal); font-weight: 700; }
+    h1 { font-size: clamp(30px, 5vw, 46px); line-height: 1.1; font-weight: 800; margin: 10px 0 12px; letter-spacing: -.01em; }
+    .lead { color: var(--muted); font-size: 17px; max-width: 760px; }
+    .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 10px; font-weight: 600; font-size: 14px; text-decoration: none; border: 1px solid var(--line); color: var(--text); background: var(--bg2); cursor: pointer; }
+    .btn.primary { background: var(--teal); color: #062026; border-color: var(--teal); }
+
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; margin: 28px 0 8px; }
+    .step { background: var(--bg2); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; }
+    .step b { display: block; font-size: 14px; margin-bottom: 4px; }
+    .step span { color: var(--muted); font-size: 13.5px; }
+    .num { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: rgba(43,191,191,.15); color: var(--teal); font-size: 12px; font-weight: 800; margin-right: 6px; }
+
+    .stage { display: flex; justify-content: center; gap: 48px; padding: 30px 0 40px; flex-wrap: wrap; }
+    .device { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .device h2 { font-size: 15px; font-weight: 700; }
+    .device p { color: var(--muted); font-size: 13px; margin-top: -8px; }
+    .phone { width: 390px; height: 800px; border-radius: 44px; padding: 12px; background: #050B12; border: 1px solid #2A3E55; box-shadow: 0 30px 80px rgba(0,0,0,.45), inset 0 0 0 2px #0B1622; }
+    .phone iframe { width: 100%; height: 100%; border: 0; border-radius: 34px; background: var(--bg); }
+    .open { font-size: 13px; }
+
+    .mobile-cards { display: none; gap: 12px; padding: 24px 0 8px; }
+    .mcard { display: block; text-decoration: none; color: var(--text); background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 18px; }
+    .mcard b { font-size: 17px; } .mcard span { display: block; color: var(--muted); font-size: 14px; margin-top: 4px; }
+
+    section.info { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 8px 0 40px; }
+    .panel { background: var(--bg2); border: 1px solid var(--line); border-radius: 16px; padding: 20px 22px; }
+    .panel h3 { font-size: 16px; margin-bottom: 10px; }
+    .panel ul { list-style: none; display: grid; gap: 8px; }
+    .panel li { color: var(--muted); font-size: 14px; padding-left: 22px; position: relative; }
+    .panel li::before { content: ''; position: absolute; left: 4px; top: 8px; width: 8px; height: 8px; border-radius: 50%; background: var(--teal); }
+    .panel.sim li::before { background: var(--gold); }
+    .panel li b { color: var(--text); font-weight: 600; }
+    .stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+    .tag { font-size: 12px; padding: 4px 9px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); color: var(--text); }
+    footer { border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; padding: 20px 0 40px; }
+
+    @media (max-width: 900px) {
+      .stage { display: none; }
+      .mobile-cards { display: grid; }
+      section.info { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="eyebrow">Proof of concept · live demo</div>
+      <h1>Care.ai: remote recovery monitoring for dermatology</h1>
+      <p class="lead">
+        Patients do a guided daily photo check-in from their phone. AI scores each face zone, flags anything
+        unusual, and the doctor sees every patient's progress and alerts in one dashboard.
+        Below are the real patient and doctor apps, running with sample patients.
+      </p>
+      <div class="links">
+        <a class="btn primary" href="patient/">Open patient app</a>
+        <a class="btn" href="doctor/">Open doctor app</a>
+        <a class="btn" id="repo" href="#">Source on GitHub</a>
+        <a class="btn" id="dbdoc" href="#">Database design</a>
+        <button class="btn" id="reset" type="button" title="Restore the original sample data">Reset demo data</button>
+      </div>
+
+      <div class="steps">
+        <div class="step"><b><span class="num">1</span>Sign in as a patient</b><span>Pick <b>Priya Sharma</b> (acne, day 32). Any password works.</span></div>
+        <div class="step"><b><span class="num">2</span>Do a check-in</b><span>Use your camera or upload a selfie. You get an AI zone analysis in seconds.</span></div>
+        <div class="step"><b><span class="num">3</span>Watch the doctor side</b><span>Sign in as <b>Dr. Sofia Martinez</b> and refresh: the new check-in and any alert show up.</span></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="stage">
+      <div class="device">
+        <h2>Patient PWA</h2><p>React · Vite · installable</p>
+        <div class="phone"><iframe id="patientFrame" src="patient/" title="Patient app" allow="camera; microphone; clipboard-write"></iframe></div>
+        <a class="open" href="patient/" target="_blank" rel="noopener">Open full screen ↗</a>
+      </div>
+      <div class="device">
+        <h2>Doctor PWA</h2><p>PRECOVERY design · real-time alerts</p>
+        <div class="phone"><iframe id="doctorFrame" src="doctor/" title="Doctor app"></iframe></div>
+        <a class="open" href="doctor/" target="_blank" rel="noopener">Open full screen ↗</a>
+      </div>
+    </div>
+
+    <div class="mobile-cards">
+      <a class="mcard" href="patient/"><b>Patient app →</b><span>Daily check-in, AI analysis, history, messages with Aisha the AI nurse.</span></a>
+      <a class="mcard" href="doctor/"><b>Doctor app →</b><span>Patient list by risk, open alerts, patient timeline, add a patient from a prescription.</span></a>
+    </div>
+
+    <section class="info">
+      <div class="panel">
+        <h3>What's real</h3>
+        <ul>
+          <li><b>The full app code</b>: the same patient and doctor PWAs that run against Supabase in production.</li>
+          <li><b>The data model</b>: sample data comes from the project's own SQL migrations and seed, loaded into Postgres and exported.</li>
+          <li><b>On-device face detection</b>: BlazeFace + MediaPipe 468-point mesh for framing and quality scoring.</li>
+          <li><b>The check-in logic</b>: status, alerts and Aisha's messages follow the edge function's rules.</li>
+        </ul>
+      </div>
+      <div class="panel sim">
+        <h3>What's simulated in this demo</h3>
+        <ul>
+          <li><b>The backend</b> runs inside your browser instead of Supabase, so there's nothing to sign up for.</li>
+          <li><b>AI analysis</b> uses the app's built-in demo mode. In pilot mode the same call goes to Claude Vision.</li>
+          <li><b>Your photos never leave your browser.</b> A small thumbnail is saved locally; Reset wipes everything.</li>
+          <li><b>Prescription OCR</b> falls back to a sample prescription.</li>
+        </ul>
+        <div class="stack" style="margin-top:14px">
+          <span class="tag">React 18</span><span class="tag">Vite PWA</span><span class="tag">Next.js 14</span><span class="tag">Supabase / Postgres</span>
+          <span class="tag">Deno edge functions</span><span class="tag">Claude Vision</span><span class="tag">MediaPipe</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">Care.ai proof of concept. Sample patients only; not for clinical use.</div>
+  </footer>
+
+  <script>
+    // Repo links work on any GitHub Pages fork: https://<owner>.github.io/<repo>/
+    (function () {
+      var owner = location.hostname.split('.')[0];
+      var repo = location.pathname.split('/').filter(Boolean)[0];
+      if (location.hostname.endsWith('github.io') && repo) {
+        var base = 'https://github.com/' + owner + '/' + repo;
+        document.getElementById('repo').href = base;
+        document.getElementById('dbdoc').href = base + '/blob/main/docs/DATABASE.md';
+      } else {
+        document.getElementById('repo').style.display = 'none';
+        document.getElementById('dbdoc').style.display = 'none';
+      }
+      document.getElementById('reset').onclick = function () {
+        localStorage.removeItem('careai-demo-db');
+        Object.keys(localStorage).forEach(function (k) { if (/^sb-.*-auth-token$/.test(k)) localStorage.removeItem(k); });
+        location.reload();
+      };
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#0a0a12" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Care.ai" />
+    <link rel="apple-touch-icon" href="%BASE_URL%icons/icon-192.png" />
+    <link rel="manifest" href="%BASE_URL%manifest.webmanifest" />
+    <script>
+      // GitHub Pages deep-link support: 404.html sends /app/some/route here as ?p=/some/route
+      (function () {
+        var p = new URLSearchParams(location.search).get('p');
+        if (p) history.replaceState(null, '', location.pathname.replace(/\/$/, '') + p);
+      })();
+    </script>
+    <title>Care.ai</title>
+
+    <!--
+      Dual face analysis pipeline:
+      1. BlazeFace (TF.js) — fast real-time face detection, ~30fps, bounding box
+      2. MediaPipe FaceLandmarker — 468 landmarks, triggered at capture + for heatmap
+    -->
+
+    <!-- BlazeFace / TensorFlow.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.10.0/dist/tf.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/blazeface@0.0.7/dist/blazeface.js" defer></script>
+
+    <!-- MediaPipe Tasks Vision (FaceLandmarker) — ES module, loaded lazily -->
+    <script type="module">
+      /**
+       * Expose MediaPipe FaceLandmarker + FilesetResolver as globals.
+       * Using version 0.10.14 — stable, GPU-accelerated on mobile.
+       * Loaded as module so it doesn't block main render.
+       */
+      import {
+        FaceLandmarker,
+        FilesetResolver,
+        ImageSegmenter,
+      } from 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/vision_bundle.mjs';
+
+      window.mpFaceLandmarker   = FaceLandmarker;
+      window.mpFilesetResolver  = FilesetResolver;
+      window.mpImageSegmenter   = ImageSegmenter;
+      window._mpTasksReady      = true;
+      window.dispatchEvent(new Event('mp-tasks-ready'));
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

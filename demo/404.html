@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Redirecting…</title>
+  <script>
+    // GitHub Pages serves this for any unknown path. Send /<repo>/<app>/some/route
+    // to /<repo>/<app>/?p=/some/route; the app restores the route on load.
+    (function () {
+      var parts = location.pathname.split('/');
+      var i = parts.findIndex(function (s) { return s === 'patient' || s === 'doctor'; });
+      if (i > 0) {
+        var base = parts.slice(0, i + 1).join('/') + '/';
+        var rest = '/' + parts.slice(i + 1).join('/');
+        location.replace(base + '?p=' + encodeURIComponent(rest + location.search) + location.hash);
+      } else {
+        location.replace('/' + (parts[1] ? parts[1] + '/' : ''));
+      }
+    })();
+  </script>
+</head>
+<body></body>
+</html>
